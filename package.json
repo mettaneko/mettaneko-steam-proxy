@@ -5,7 +5,9 @@
   "main": "api/steam/recent-games.js",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^3.3.2", 
+    "sharp": "^0.33.0"  
+    // ^ Добавлена библиотека для работы с изображениями
   },
   "scripts": {
     "start": "echo 'This project is for Vercel deployment.'"
