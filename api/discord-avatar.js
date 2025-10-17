@@ -1,9 +1,28 @@
-// Замени на свой ID пользователя
 const USER_ID = '1066044494992113685'; 
 // !!! Добавь свой Bot Token в переменные окружения Vercel как DISCORD_BOT_TOKEN !!!
 const DISCORD_TOKEN = process.env.DISCORD_BOT_TOKEN;
 
 module.exports = async (req, res) => {
+    // ----------------------------------------------------
+    // !!! НОВОЕ: УСТАНОВКА ЗАГОЛОВКОВ CORS !!!
+    // ----------------------------------------------------
+    // Устанавливаем заголовок, чтобы разрешить запрос с вашего домена.
+    // Если нужно разрешить всем (менее безопасно, но просто), используйте '*'.
+    // Если хотите быть точным, используйте ваш домен.
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.mettaneko.ru');
+    // Или, чтобы разрешить запросы отовсюду:
+    // res.setHeader('Access-Control-Allow-Origin', '*'); 
+    
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    // Обработка запросов OPTIONS (предварительный запрос CORS)
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+    // ----------------------------------------------------
+
     if (!DISCORD_TOKEN) {
         return res.status(500).json({ error: "DISCORD_BOT_TOKEN не установлен" });
     }
@@ -17,23 +36,18 @@ module.exports = async (req, res) => {
         });
 
         if (!response.ok) {
+            // Обязательно установите CORS-заголовок и для ошибок!
+            res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate'); 
             throw new Error(`Discord API Error: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
         const avatarHash = data.avatar;
 
-        if (!avatarHash) {
-            // Пользователь использует стандартный аватар Discord
-            const defaultAvatarUrl = `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`;
-            return res.json({ avatarUrl: defaultAvatarUrl });
-        }
-
-        const isAnimated = avatarHash.startsWith('a_');
-        const format = isAnimated ? 'gif' : 'webp';
+        // ... (остальной код для определения URL аватара) ...
         
-        const avatarUrl = `https://cdn.discordapp.com/avatars/${USER_ID}/${avatarHash}.${format}?size=256`;
-
+        const avatarUrl = '...'; // Сюда будет ваш финальный URL
+        
         // Устанавливаем кеширование для браузера
         res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate'); // 5 минут кеша
         res.json({ avatarUrl });
