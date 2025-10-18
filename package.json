@@ -4,9 +4,6 @@
   "description": "A Vercel Serverless Function to proxy Steam Web API requests for mettaneko.ru",
   "main": "api/steam/recent-games.js",
   "license": "MIT",
-  "scripts": {
-    "dev": "vercel dev"
-  },
   "dependencies": {
     "node-fetch": "^2.6.1",
     "sharp": "^0.33.0",
@@ -15,6 +12,7 @@
     "vercel": "^28.0.0"
   },
   "scripts": {
-    "start": "echo 'This project is for Vercel deployment.'"
+    "start": "echo 'This project is for Vercel deployment.'",
+    "dev": "vercel dev"
   }
 }
