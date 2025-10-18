@@ -5,8 +5,8 @@
   "main": "api/steam/recent-games.js",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^3.3.2", 
-    "sharp": "^0.33.0"  
+    "node-fetch": "^2.6.1",
+    "sharp": "^0.33.0"
   },
   "scripts": {
     "start": "echo 'This project is for Vercel deployment.'"
