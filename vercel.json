@@ -2,6 +2,9 @@
   "functions": {
     "api/deezer.js": {
       "maxDuration": 10
+    },
+    "api/steam/recent-games.js": {
+      "maxDuration": 10
     }
   },
   "headers": [
