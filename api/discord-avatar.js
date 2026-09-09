@@ -1,4 +1,4 @@
-const USER_ID = '1066044494992113685'; 
+const USER_ID = '1505966421673377902'; 
 const DISCORD_TOKEN = process.env.DISCORD_BOT_TOKEN;
 const ALLOWED_ORIGIN = 'https://www.mettaneko.ru'; 
 
