@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "node-fetch": "^2.6.1",
-    "sharp": "^0.33.0",
+    "sharp": "^0.33.0"
   },
   "devDependencies": {
     "vercel": "^28.0.0"
