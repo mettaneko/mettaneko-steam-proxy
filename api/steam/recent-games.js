@@ -9,9 +9,7 @@ const fetch = require('node-fetch'); // Эта библиотека будет �
 module.exports = async (req, res) => {
     // --- Настройка CORS заголовков ---
     // ОЧЕНЬ ВАЖНО: Замените 'https://www.mettaneko.ru' на ТОЧНЫЙ домен вашего сайта на GitHub Pages.
-    const allowedOrigin = 'https://www.mettaneko.ru'; // Или 'https://mettaneko.ru'
-
-    res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS'); // Разрешаем методы GET и OPTIONS
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Разрешаем заголовок Content-Type
 

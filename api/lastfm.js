@@ -5,14 +5,19 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     if (req.method === 'OPTIONS') return res.status(200).end();
 
-    const { user, api_key, limit } = req.query;
+        const { user, limit } = req.query;
+    const LASTFM_API_KEY = process.env.LASTFM_API_KEY;
 
-    if (!user || !api_key) {
-        return res.status(400).json({ error: 'Missing user or api_key' });
+    if (!user) {
+        return res.status(400).json({ error: 'Missing user parameter' });
+    }
+    
+    if (!LASTFM_API_KEY) {
+        return res.status(500).json({ error: 'Server configuration error: LASTFM_API_KEY is missing.' });
     }
 
     try {
-        const lastFmUrl = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${api_key}&format=json&limit=${limit || 1}`;
+        const lastFmUrl = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${LASTFM_API_KEY}&format=json&limit=${limit || 1}`;
         const response = await fetch(lastFmUrl);
         
         if (!response.ok) {
